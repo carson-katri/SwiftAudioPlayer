@@ -27,7 +27,7 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 
-class SAPlayerPresenter {
+public class SAPlayerPresenter {
     weak var delegate: SAPlayerDelegate?
     var shouldPlayImmediately = false //for auto-play
     
@@ -35,7 +35,7 @@ class SAPlayerPresenter {
     var duration: Duration?
     
     private var key: String?
-    private var isPlaying: SAPlayingStatus = .buffering
+    public var isPlaying: SAPlayingStatus = .buffering
     private var mediaInfo: SALockScreenInfo?
     
     private var urlKeyMap: [Key: URL] = [:]
