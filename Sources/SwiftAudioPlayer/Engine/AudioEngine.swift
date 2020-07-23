@@ -43,7 +43,7 @@ public class AudioEngine: AudioEngineProtocol {
     weak var delegate:AudioEngineDelegate?
     let key:Key
     
-    var engine = AVAudioEngine()
+    public var engine = AVAudioEngine()
     let playerNode = AVAudioPlayerNode()
     
     var timer: Timer?

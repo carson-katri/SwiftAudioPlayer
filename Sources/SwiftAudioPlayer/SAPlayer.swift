@@ -42,8 +42,8 @@ public class SAPlayer {
      */
     public static let shared: SAPlayer = SAPlayer()
     
-    private var presenter: SAPlayerPresenter!
-    private var player: AudioEngine?
+    public var presenter: SAPlayerPresenter!
+    public var player: AudioEngine?
     
     /**
     Access the engine of the player. Engine is nil if player has not been initialized with audio.
