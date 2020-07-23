@@ -36,7 +36,6 @@ func ParserPacketListener(_ context: UnsafeMutableRawPointer, _ byteCount: UInt3
     let selfAudioParser = Unmanaged<AudioParser>.fromOpaque(context).takeUnretainedValue()
     
     let isCompressed = packetDescriptions != nil
-    print(packetDescriptions as Any)
     
     guard let fileAudioFormat = selfAudioParser.fileAudioFormat else {
         Log.monitor("shouldnot have reached packet listener without a data format")
