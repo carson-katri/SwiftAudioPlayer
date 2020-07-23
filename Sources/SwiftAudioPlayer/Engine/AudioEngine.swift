@@ -39,7 +39,7 @@ protocol AudioEngineDelegate: AnyObject {
     func didError()
 }
 
-class AudioEngine: AudioEngineProtocol {
+public class AudioEngine: AudioEngineProtocol {
     weak var delegate:AudioEngineDelegate?
     let key:Key
     
@@ -48,7 +48,7 @@ class AudioEngine: AudioEngineProtocol {
     
     var timer: Timer?
     
-    static let defaultEngineAudioFormat: AVAudioFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 44100, channels: 2, interleaved: false)!
+    public static let defaultEngineAudioFormat: AVAudioFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 44100, channels: 2, interleaved: false)!
     
     var state:TimerState = .suspended
     enum TimerState {
