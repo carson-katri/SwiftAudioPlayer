@@ -32,12 +32,11 @@
 import Foundation
 import AVFoundation
 
-func ParserPacketListener(_ context: UnsafeMutableRawPointer, _ byteCount: UInt32, _ packetCount: UInt32, _ streamData: UnsafeRawPointer, _ packetDescriptions: UnsafeMutablePointer<AudioStreamPacketDescription>) {
+func ParserPacketListener(_ context: UnsafeMutableRawPointer, _ byteCount: UInt32, _ packetCount: UInt32, _ streamData: UnsafeRawPointer, _ packetDescriptions: UnsafeMutablePointer<AudioStreamPacketDescription>?) {
     let selfAudioParser = Unmanaged<AudioParser>.fromOpaque(context).takeUnretainedValue()
     
-    //bug in core audio where this could be nil
-    let packetDescriptionOrNil: UnsafeMutablePointer<AudioStreamPacketDescription>? = packetDescriptions
-    let isCompressed = packetDescriptionOrNil != nil
+    let isCompressed = packetDescriptions != nil
+    print(packetDescriptions as Any)
     
     guard let fileAudioFormat = selfAudioParser.fileAudioFormat else {
         Log.monitor("shouldnot have reached packet listener without a data format")
@@ -52,7 +51,7 @@ func ParserPacketListener(_ context: UnsafeMutableRawPointer, _ byteCount: UInt3
     //TODO refactor this after we get it working
     if isCompressed {
         for i in 0 ..< Int(packetCount) {
-            let audioPacketDescription = packetDescriptions[i]
+            let audioPacketDescription = packetDescriptions![i]
             let audioPacketStart = Int(audioPacketDescription.mStartOffset)
             let audioPacketSize = Int(audioPacketDescription.mDataByteSize)
             let audioPacketData = Data(bytes: streamData.advanced(by: audioPacketStart), count: audioPacketSize)
